@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Standard 2D Negombo - Seat Booking</title>
+  <link rel="stylesheet" href="theaters.css">
+  <link rel="icon" href="../Logos/1.jpeg" type="image/jpeg">
+</head>
+<body>
+  <h1>Standard 2D Negombo - Seat Booking</h1>
+  <div class="theater-container">
+    <div class="screen">SCREEN</div>
+    <div class="seat-layout" id="seating">
+      <!-- Seats will be generated here by JS -->
+    </div>
+    <button id="confirm-booking">Confirm Booking</button>
+  </div>
+  <div class="booking-info">
+    <h2>Booking: <span id="movie-title">Movie</span></h2>
+    <p>Theater: <span id="theater-name">--</span></p>
+    <p>Showtime: <span id="showtime">--:-- --</span></p>
+  </div>
+  
+  <script src="negombo-2d.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const movie = urlParams.get('movie');
+      const time = urlParams.get('time');
+      
+      // Get theater name from URL path
+      const pathParts = window.location.pathname.split('/');
+      const theaterFile = pathParts[pathParts.length - 1]; // e.g. "malabe-imax.html"
+      const [location, theaterType] = theaterFile.replace('.html', '').split('-');
+      
+      // Map theater types to display names
+      const theaterNames = {
+        'imax': 'IMAX Experience',
+        '3d': '3D Cinema',
+        'standard': 'Standard',
+        '4k': 'Premium 4K Dolby',
+        'family': 'Family Friendly',
+        'vip': 'VIP Lounge',
+        '2d': 'Standard 2D'
+      };
+      
+      // Map location IDs to display names
+      const locationNames = {
+        'malabe': 'Malabe',
+        'bambalapitiya': 'Bambalapitiya',
+        'negombo': 'Negombo'
+      };
+      
+      if (movie) {
+        document.getElementById('movie-title').textContent = decodeURIComponent(movie);
+      }
+      
+      if (time) {
+        document.getElementById('showtime').textContent = time;
+      }
+      
+      // Set theater name dynamically
+      const theaterDisplayName = theaterNames[theaterType] || theaterType;
+      const locationDisplayName = locationNames[location] || location;
+      document.getElementById('theater-name').textContent = `${theaterDisplayName} (${locationDisplayName})`;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+/* Neon Night Theme */
+.neon-theme {
+  background-color: #0D1321;
+  color: #EAEAEA;
+}
+
+.neon-theme h1 {
+  color: #00FFFF;
+  text-shadow: 0 0 10px #00FFFF;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.standard-theater .screen {
+  background: linear-gradient(to bottom, #00FFFF, #0077B6);
+  box-shadow: 0 0 20px #00FFFF;
+  color: #0D1321;
+  text-shadow: 0 0 5px #FFFFFF;
+}
+
+.standard-theater .seat {
+  border: 1px solid #00FFFF;
+  box-shadow: 0 0 5px #00FFFF;
+  color: #00FFFF;
+  background: rgba(0, 255, 255, 0.1);
+}
+
+.standard-theater .seat:hover {
+  background: #00FFFF;
+  color: #0D1321;
+  box-shadow: 0 0 15px #00FFFF;
+}
+
+.standard-theater .seat.selected {
+  background: #FF1493;
+  border-color: #FF1493;
+  box-shadow: 0 0 15px #FF1493;
+  color: white;
+}
+
+.standard-theater button {
+  background: linear-gradient(45deg, #FF1493, #9400D3);
+  border: none;
+  box-shadow: 0 0 10px #FF1493;
+}
+
+.standard-theater button:hover {
+  background: linear-gradient(45deg, #9400D3, #FF1493);
+  box-shadow: 0 0 20px #FF1493;
+}
+
+/* Centered Seat Layout */
+.theater-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.theater-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.seat-layout {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: 10px;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Seat Numbering */
+.seat::after {
+  content: attr(data-seat);
+  position: absolute;
+  bottom: -20px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: #00FFFF;
+}
+
+.seat.selected::after {
+  color: white;
+}
+
+/* Row Indicators */
+.row-indicator {
+  grid-column: 1 / span 16;
+  text-align: center;
+  color: #FF1493;
+  font-weight: bold;
+  margin: 10px 0;
+  text-shadow: 0 0 5px #FF1493;
+}
+
+/* Aisle Space */
+.aisle-space {
+  grid-column: 8 / span 2;
+}
+
+@media (max-width: 768px) {
+  .seat-layout {
+    grid-template-columns: repeat(8, 1fr);
+    gap: 8px;
+  }
+  
+  .aisle-space {
+    display: none;
+  }
+  
+  .seat::after {
+    font-size: 10px;
+    bottom: -15px;
+  }
+}
